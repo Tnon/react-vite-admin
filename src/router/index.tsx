@@ -2,7 +2,7 @@
  * @Author: Delevin.TnT
  * @LastEditors: Delevin.TnT
  * @Date: 2021-11-08 20:38:50
- * @LastEditTime: 2021-11-11 09:56:28
+ * @LastEditTime: 2021-11-11 15:30:50
  */
 import { Suspense } from "react";
 import Transiton from "@/components/Transiton";
@@ -25,7 +25,7 @@ const AttackPage = getAsyncPage("attack");
 const NotFound = getAsyncPage("error");
 const routerList: CustomRouteObject[] = [
   {
-    path: "login",
+    path: "/login",
     element: <RouterGuard element={<LoginPage />} valid={false} />,
   },
   {
