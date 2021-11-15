@@ -4,9 +4,9 @@
  * @Date: 2021-11-10 17:59:54
  * @LastEditTime: 2021-11-15 10:24:42
  */
-import { FC, Suspense, useCallback, useEffect, useState } from "react";
+import { FC, Suspense, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { Layout, Drawer } from "antd";
+import { Layout } from "antd";
 import { Header } from "./header";
 import { routerList } from "@/router";
 import { MenuComponent } from "./menu";
@@ -15,7 +15,7 @@ const LayoutPage: FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const nav = useNavigate();
   useEffect(() => {
-    if (location.hash === "") {
+    if (!location.hash) {
       nav("/overview");
     }
   }, [nav, location]);
@@ -23,7 +23,7 @@ const LayoutPage: FC = () => {
     <Layout className="layout-page">
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
-          <MenuComponent menuList={routerList} />
+          <MenuComponent menuList={routerList} collapsed={collapsed} />
         </Sider>
 
         <Content className="layout-page-content">
