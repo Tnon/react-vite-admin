@@ -1,7 +1,7 @@
-import { createElement, FC } from "react";
+import { createElement, FC, useEffect, useState } from "react";
 import { Menu } from "antd";
 import type { CustomRouteObject } from "@/router";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate, useLocation } from "react-router-dom";
 
 interface MenuList {
   menuList: CustomRouteObject[];
@@ -13,8 +13,18 @@ export const MenuComponent: FC<MenuList> = ({ menuList }) => {
   const clickMenu = ({ keyPath }: { keyPath: string[] }): void => {
     nav(keyPath.reverse().join("/"));
   };
+  const [selectedKeys, setSelectedKeys] = useState<string>("");
+  const { pathname } = useLocation();
+  useEffect(() => {
+    setSelectedKeys(pathname.split("/")[pathname.split("/").length - 1]);
+  }, [pathname]);
   return (
-    <Menu mode="inline" theme="dark" onClick={clickMenu}>
+    <Menu
+      mode="inline"
+      theme="dark"
+      selectedKeys={[selectedKeys]}
+      onClick={clickMenu}
+    >
       {menuList
         .filter((child) => child.children)
         .map((router) => {
