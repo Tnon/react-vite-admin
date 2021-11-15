@@ -1,5 +1,5 @@
 import { FC } from "react";
 const Risk: FC = () => {
-  return <div>Risk</div>;
+  return <div>德莱文</div>;
 };
 export default Risk;

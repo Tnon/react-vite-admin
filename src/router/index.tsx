@@ -4,26 +4,28 @@
  * @Date: 2021-11-08 20:38:50
  * @LastEditTime: 2021-11-11 15:30:50
  */
-import { Suspense } from "react";
+import { ReactElement, Suspense } from "react";
 import Transiton from "@/components/Transiton";
 import { useRoutes, RouteObject } from "react-router-dom";
 import { RouterGuard } from "./guard";
 import { getAsyncPage } from "@/utils";
-type CustomRouteObject = Omit<RouteObject, "children"> & {
+import { UserOutlined } from "@ant-design/icons";
+export type CustomRouteObject = Omit<RouteObject, "children"> & {
   meta?: {
-    icon: string;
-    name: string;
+    icon?: ReactElement;
+    name?: string;
+    type?: string;
   };
-  children?: CustomRouteObject[];
+  children?: Array<CustomRouteObject>;
 };
 //页面懒加载
 const LoginPage = getAsyncPage("login");
 const LayOutPage = getAsyncPage("layout");
 const OverViewPage = getAsyncPage("overview");
-const RiskPage = getAsyncPage("risk");
-const AttackPage = getAsyncPage("attack");
+const Delevin = getAsyncPage("hero/delevin");
+const WjzlPage = getAsyncPage("equip/wjzl");
 const NotFound = getAsyncPage("error");
-const routerList: CustomRouteObject[] = [
+export const routerList: Array<CustomRouteObject> = [
   {
     path: "/login",
     element: <RouterGuard element={<LoginPage />} valid={false} />,
@@ -36,25 +38,43 @@ const routerList: CustomRouteObject[] = [
         path: "overview",
         element: <RouterGuard element={<OverViewPage />} />,
         meta: {
-          icon: "",
-          name: "总览",
+          icon: <UserOutlined />,
+          name: "联盟",
         },
       },
       {
-        path: "risk",
-        element: <RouterGuard element={<RiskPage />} />,
+        path: "hero",
         meta: {
-          icon: "",
-          name: "风险",
+          icon: <UserOutlined />,
+          name: "英雄",
         },
+        children: [
+          {
+            path: "delevin",
+            element: <RouterGuard element={<Delevin />} />,
+            meta: {
+              icon: <UserOutlined />,
+              name: "德莱文",
+            },
+          },
+        ],
       },
       {
-        path: "attack",
-        element: <RouterGuard element={<AttackPage />} />,
+        path: "equip",
         meta: {
-          icon: "",
-          name: "攻击",
+          icon: <UserOutlined />,
+          name: "装备",
         },
+        children: [
+          {
+            path: "wjzl",
+            element: <RouterGuard element={<WjzlPage />} />,
+            meta: {
+              icon: <UserOutlined />,
+              name: "无尽之力",
+            },
+          },
+        ],
       },
       {
         path: "*",

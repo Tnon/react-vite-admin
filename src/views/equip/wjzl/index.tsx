@@ -1,5 +1,5 @@
 import { FC } from "react";
 const Attack: FC = () => {
-  return <div>Attack</div>;
+  return <div>无尽之力</div>;
 };
 export default Attack;
