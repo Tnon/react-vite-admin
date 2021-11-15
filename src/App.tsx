@@ -6,7 +6,6 @@
  */
 import { HashRouter } from "react-router-dom";
 import Routers from "./router";
-// import "antd/dist/antd.less";
 const App: React.FC = () => {
   return (
     <HashRouter>
